@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sandbox"
+        xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="FirstWindow" Height="300" Width="550">
+        Title="FirstWindow" Height="300" Width="550"
+        >
+    <Window.DataContext>
+        <vm:MainViewModel_FirstWindow/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -15,11 +20,11 @@
         <GroupBox Grid.Row="0" Margin="50">
             <Grid>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="300" Margin="5,0,0,0">
-                    <RadioButton x:Name="RB_NewStudent" GroupName="Students" Content="Neuen Schüler hinzufügen" FlowDirection="RightToLeft" HorizontalAlignment="Left" Margin="10" Width="200"/>
-                    <RadioButton x:Name="RB_ExistingStudent" Margin="10" GroupName="Students" Content="Bestehenden Schüler auswählen" FlowDirection="RightToLeft" HorizontalAlignment="Left" Width="200"/>
+                    <RadioButton x:Name="RB_NewStudent" GroupName="Students" Content="Neuen Schüler hinzufügen" FlowDirection="RightToLeft" HorizontalAlignment="Left" Margin="10" Width="200" IsChecked="{Binding Path=ButtonAIsChecked, Mode=TwoWay}"/>
+                    <RadioButton x:Name="RB_ExistingStudent" Margin="10" GroupName="Students" Content="Bestehenden Schüler auswählen" FlowDirection="RightToLeft" HorizontalAlignment="Left" Width="200" IsChecked="{Binding Path=ButtonBIsChecked, Mode=TwoWay}"/>
                 </StackPanel>
             </Grid>
          </GroupBox>
-        <Button x:Name="Button_Weiter_Fenster1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="25" Content="Weiter" Margin="10" Click="Button_Weiter_Fenster1_Click"/>
+        <Button x:Name="Button_Weiter_Fenster1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="25" Content="Weiter" Margin="10" Command="{Binding NextCommand}"/>
     </Grid>
 </Window>
