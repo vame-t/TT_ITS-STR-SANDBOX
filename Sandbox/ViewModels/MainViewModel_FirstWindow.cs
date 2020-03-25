@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Sandbox.Views;
 using System.Windows;
-using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Command;
 
 namespace Sandbox.ViewModels
 {
