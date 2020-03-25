@@ -5,6 +5,6 @@
              StartupUri="Views/FirstWindow.xaml"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
-       
+      
     </Application.Resources>
 </Application>

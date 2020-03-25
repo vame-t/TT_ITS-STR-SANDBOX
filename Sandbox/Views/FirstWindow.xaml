@@ -6,17 +6,20 @@
         xmlns:local="clr-namespace:Sandbox"
         xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="FirstWindow" Height="300" Width="550"
-        >
+        Title="Zeugnis Management Tool" Height="300" Width="550">
+    <!--Visibility="{Binding Path=IsVisible, Mode=TwoWay,Converter={StaticResource BoolToVisConverter}}"-->
     <Window.DataContext>
         <vm:MainViewModel_FirstWindow/>
     </Window.DataContext>
+    <!--<Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+    </Window.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Content="Zeugnis Managament-Tool" />
+        <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10" Content="Zeugnis Managament-Tool" FontWeight="Bold" FontSize="20"/>
         <GroupBox Grid.Row="0" Margin="50">
             <Grid>
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="300" Margin="5,0,0,0">

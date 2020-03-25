@@ -5,17 +5,8 @@ using System.Windows;
 
 namespace Sandbox.Views
 {
-    /// <summary>
-    /// Interaction logic for FirstWindow.xaml
-    /// </summary>
     public partial class FirstWindow : Window
     {
-        //protected override void OnClosed(EventArgs e)
-        //{
-        //    base.OnClosed(e);
-
-        //    Application.Current.Shutdown();
-        //}
         public FirstWindow()
         {
             InitializeComponent();
@@ -25,9 +16,9 @@ namespace Sandbox.Views
             {
                 vm.CloseAction = new Action(this.Close); 
             }
+            
+           
         }
-
-      
     }
 }
 

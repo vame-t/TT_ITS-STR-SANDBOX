@@ -31,9 +31,18 @@ namespace Sandbox.ViewModels
         private bool ButtonNewStudentIsChecked;
         private bool ButtonBestehenderSchueler;
         private ICommand nextCommand;
-        public Action CloseAction { get; set;}
+        //private bool isVisible;
 
         //Properties: 
+        public Action CloseAction { get; set;}
+        //public bool IsVisible
+        //{
+        //    get { return this.isVisible; }
+        //    set 
+        //    {   this.isVisible = true;
+        //        NotifyOfPropertyChange("IsVisible");  
+        //    }
+        //}
         public bool ButtonAIsChecked
         {
             get { return ButtonNewStudentIsChecked; }
@@ -72,6 +81,9 @@ namespace Sandbox.ViewModels
                 {
                     formular.Show();
                     CloseAction();
+                   
+
+                    
 
                 }
                 else if (ButtonBIsChecked == true)
@@ -81,7 +93,7 @@ namespace Sandbox.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Bitte wählen Sie eines der wählbaren Funktionen aus.");
+                    MessageBox.Show("Bitte wählen Sie eines der wählbaren Funktionen aus.","Bitte wählen sie ein RadioButton aus" ,MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
             }
@@ -92,6 +104,14 @@ namespace Sandbox.ViewModels
             
             
         }
+        //protected void NotifyOfPropertyChange(string name)
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null)
+        //    {
+        //        handler(this, new PropertyChangedEventArgs(name));
+        //    }
+        //}
     }
 
 

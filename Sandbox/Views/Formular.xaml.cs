@@ -23,7 +23,8 @@ namespace Sandbox.Views
         public Formular()
         {
             InitializeComponent();
-            DataContext = new MainViewModel_Formular();
+            MainViewModel_Formular vm = new MainViewModel_Formular();
+            this.DataContext = vm; 
         }
 
 
