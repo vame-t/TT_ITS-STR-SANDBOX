@@ -10,7 +10,7 @@ namespace Sandbox.Models
     {
         //Properties: 
         public String Vorname {get; set;}
-        public String Nachname { get; set; }
+        public String Nachname {get; set;}
         public String GeborenAm {get; set;}
         public String GeburtsOrt {get; set;}
         public String TelNr {get; set;}
