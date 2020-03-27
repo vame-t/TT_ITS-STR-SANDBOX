@@ -1,0 +1,31 @@
+﻿<Window x:Class="Sandbox.Views.DeleteStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sandbox.Views"
+        xmlns:vm="clr-namespace:Sandbox.ViewModels"
+        mc:Ignorable="d"
+        Title="DeleteStudent" Height="600" Width="400">
+    <Window.DataContext>
+        <vm:MainViewModel_DeleteStudent/>
+    </Window.DataContext>
+    <Grid>
+        <GroupBox Margin="20">
+            <Grid>
+                <Label Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Klasse auswählen:" Width="110" Height="25" FontWeight="Bold"/>
+                <ComboBox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="75,10,10,10" Width="150" Height="25">
+                </ComboBox>
+                <ListBox Margin="50,100,50,75">
+                </ListBox>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,115,5" Content="Löschen"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,20,5" Content="Schließen" Command="{Binding CloseCommand}"/>
+                
+            </Grid>
+        </GroupBox>
+        
+        
+        
+    </Grid>
+    
+</Window>

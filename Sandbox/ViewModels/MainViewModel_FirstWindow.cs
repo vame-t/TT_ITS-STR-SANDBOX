@@ -27,9 +27,11 @@ namespace Sandbox.ViewModels
 
         //Fields: 
         Formular formular = new Formular();
-        Window2 notenFormular = new Window2(); 
+        DeleteStudent deleteStudentWindow = new DeleteStudent(); 
+        Window2 notenFormular = new Window2();
         private bool ButtonNewStudentIsChecked;
         private bool ButtonBestehenderSchueler;
+        private bool ButtonDeleteSchueler;
         private ICommand nextCommand;
         //private bool isVisible;
 
@@ -59,6 +61,11 @@ namespace Sandbox.ViewModels
                 ButtonBestehenderSchueler = value;
             }
         }
+        public bool ButtonCIsChecked
+        {
+            get { return ButtonDeleteSchueler;}
+            set { ButtonDeleteSchueler = value;}
+        }
         public ICommand NextCommand
         {
             get
@@ -82,13 +89,15 @@ namespace Sandbox.ViewModels
                     formular.Show();
                     CloseAction();
                    
-
-                    
-
                 }
                 else if (ButtonBIsChecked == true)
                 {
                     notenFormular.Show();
+                    CloseAction(); 
+                }
+                else if (ButtonCIsChecked == true)
+                {
+                    deleteStudentWindow.Show();
                     CloseAction(); 
                 }
                 else

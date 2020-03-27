@@ -25,7 +25,7 @@
                 <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="90" Width="300" Margin="5,0,0,0">
                     <RadioButton x:Name="RB_NewStudent" GroupName="Students" Content="Neuen Schüler hinzufügen" VerticalAlignment="Top" FlowDirection="RightToLeft" HorizontalAlignment="Left" Margin="10,10,0,0" Width="200" IsChecked="{Binding Path=ButtonAIsChecked, Mode=TwoWay}"/>
                     <RadioButton x:Name="RB_ExistingStudent" Margin="10" GroupName="Students" Content="Bestehenden Schüler auswählen" VerticalAlignment="Center" FlowDirection="RightToLeft" HorizontalAlignment="Left" Width="200" IsChecked="{Binding Path=ButtonBIsChecked, Mode=TwoWay}"/>
-                    <RadioButton x:Name="RB_DeleteStudent" GroupName="Students" Margin="10,0,0,0"  Content="Schüler entfernen" FlowDirection="RightToLeft" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200"/>
+                    <RadioButton x:Name="RB_DeleteStudent" GroupName="Students" Margin="10,0,0,0"  Content="Schüler entfernen" FlowDirection="RightToLeft" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" IsChecked="{Binding Path=ButtonCIsChecked, Mode=TwoWay}"/>
                 </StackPanel>
             </Grid>
          </GroupBox>
