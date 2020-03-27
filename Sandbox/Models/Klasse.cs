@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace Sandbox.Models
 {
     public class Klasse
     {
         //Eigenschaften: 
-        private String KlassenName { get; set;}
+        public List KlassenNamen { get; set;}
 
 
         //Konstruktor: 

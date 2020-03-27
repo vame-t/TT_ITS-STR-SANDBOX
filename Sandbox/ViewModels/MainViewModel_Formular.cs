@@ -6,6 +6,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Sandbox.Views;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace Sandbox.ViewModels
 {
@@ -21,15 +22,28 @@ namespace Sandbox.ViewModels
         //Fields:
         public Window2 notenFormular = new Window2(); 
         private Schueler schueler = new Schueler();
+        private Klasse klasse = new Klasse(); 
         private ICommand saveCommand;
         private ICommand nextCommand;
+        
         //Properties:
         public Schueler SchuelerProp
         {
             get { return schueler; }
             set { schueler = value;
                 //Welche Eigenschaft soll aktualisiert werden:      
-                PropertyChanged(this, new PropertyChangedEventArgs("Schueler"));
+                PropertyChanged(this, new PropertyChangedEventArgs("SchuelerProp"));
+            }
+
+        }
+        public Klasse KlasseProp
+        {
+            get { return klasse; }
+            set
+            {
+                klasse = value;
+                //Welche Eigenschaft soll aktualisiert werden:      
+                PropertyChanged(this, new PropertyChangedEventArgs("KlasseProp"));
             }
 
         }
@@ -45,18 +59,6 @@ namespace Sandbox.ViewModels
                 return nextCommand;
             }
         }
-
-
-
-
-        //Konstruktor:
-        public MainViewModel_Formular()
-        {
-            
-            
-        }
-        //Command-Methoden: 
-
         public ICommand SaveCommand
         {
             get {
@@ -67,38 +69,71 @@ namespace Sandbox.ViewModels
                 return saveCommand; }
         }
 
+        //Konstruktor:
+        public MainViewModel_Formular()
+        {
+            //SchuelerAnrede = new ObservableCollection<Schueler>()
+            //{
+            //    new Schueler() { Anrede = "Herr" },
+            //    new Schueler() { Anrede = "Frau" }
+            //};
+            
+        }
+
+        //Methoden:
+
+        //Diese Methode ist noch unvollständig und muss noch bearbeitet werden !!
         public void clickNext()
         {
             notenFormular.Show(); 
         }
 
-
-
-        //Methoden:
+        //Diese Methode ist noch unvollständig und muss noch bearbeitet werden !!
         public void SaveStudentToDB()
         {
-            Formular formular = new Formular(); 
             mySqlConnection.Open();
-            string query = "INSERT INTO `zeugnisdb`.`tbl_schüler` (`Nachname`) VALUES(@Nachname);";
+            string query = "INSERT INTO `zeugnisdb`.`tbl_schüler` (`Anrede`,`Nachname`, `Vorname`, `Geburtsdatum`,`Geburtsort`,`Telefonnummer`,EMail) VALUES(@Anrede,@Nachname,@Vorname,@Geburtsdatum,@Geburtsort,@Telefonnummer,@EMail);";
             MySqlCommand command = new MySqlCommand(query, mySqlConnection);
-            formular.txt_Nachname.Text = SchuelerProp.Nachname; 
+            command.Parameters.AddWithValue("@Anrede", SchuelerProp.Anrede); 
             command.Parameters.AddWithValue("@Nachname",SchuelerProp.Nachname);
-            //command.Parameters.AddWithValue("@Vorname",SchuelerProp.Vorname);
-            //command.Parameters.AddWithValue("@Geburtsdatum",formular.txt_GeborenAm.Text);
-            //command.Parameters.AddWithValue("@Geburtsort",formular.txt_In.Text);
-            //command.Parameters.AddWithValue("@Telefonnummer",formular.txt_Telefon.Text);
-            //command.Parameters.AddWithValue("@EMail",formular.txt_EMail.Text);
+            command.Parameters.AddWithValue("@Vorname",SchuelerProp.Vorname);
+            command.Parameters.AddWithValue("@Geburtsdatum",SchuelerProp.GeborenAm);
+            command.Parameters.AddWithValue("@Geburtsort",SchuelerProp.GeburtsOrt);
+            command.Parameters.AddWithValue("@Telefonnummer",SchuelerProp.TelNr);
+            command.Parameters.AddWithValue("@EMail",SchuelerProp.EMail);
+            //Query2 unnötig, Klassen sollen schon im vorraus selektierbar sein´, es sollen keine neuen Klassen erstellt werden, wird eine neue Klasse erstellt dann ein neuer Eintrag in die Datenbank. 
+            string query2 = "INSERT INTO `zeugnisdb`.`tbl_klasse` (`NameKlasse`) VALUES (@NameKlasse);";
+            MySqlCommand command2 = new MySqlCommand(query2, mySqlConnection);
+            //command2.Parameters.AddWithValue("@NameKlasse", KlasseProp.KlassenName);
             command.ExecuteNonQuery();
-            MessageBox.Show("Button funktioniert"); 
+            command2.ExecuteNonQuery(); 
+            MessageBox.Show("Alle Daten wurden vollständig hinzugefügt", "Info",MessageBoxButton.OK, MessageBoxImage.Information);
             mySqlConnection.Close(); 
 
         }
 
-
-
-         
-
-
-
     }
+
+    //Versuche: Combobox Auswahl: 
+    //private ObservableCollection<Schueler> schuelerAnrede;
+    //private Schueler selectedAnrede; 
+    //public ObservableCollection<Schueler> SchuelerAnrede
+    //{
+    //    get { return schuelerAnrede; }
+    //    set { schuelerAnrede = value; }
+    //}
+    //public Schueler SelectedAnrede
+    //{
+    //    get { return selectedAnrede;}
+    //    set { selectedAnrede = value; }
+    //}
+
+        //protected void NotifyOfPropertyChange(string name)
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null)
+        //    {
+        //        handler(this, new PropertyChangedEventArgs(name));
+        //    }
+        //}
 }

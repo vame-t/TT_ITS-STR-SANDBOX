@@ -29,25 +29,29 @@
                 </Grid.RowDefinitions>
                 <Label x:Name="Label_Anrede" Content="Anrede:" Height="25" Width="50"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
                 <!--<TextBox x:Name="txt_Anrede" Height="25" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,5,0,0"/>-->
-                <ComboBox x:Name="Combo_Anrede" Height="25" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5,0,0">
+                <!--<ComboBox x:Name="Combo_Anrede" Height="25" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5,0,0">
                     <ComboBoxItem x:Name="Herr">Herr</ComboBoxItem>
                     <ComboBoxItem x:Name="Frau">Frau</ComboBoxItem>
-                </ComboBox>
+                </ComboBox>-->
+                <StackPanel  Margin="10,5,0,0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">
+                    <RadioButton x:Name="RB_Herr" HorizontalAlignment="Left" Margin="10" Content="Herr"></RadioButton>
+                    <RadioButton x:Name="RB_Frau" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Frau"></RadioButton>
+                </StackPanel>
                 <Label x:Name="Label_Vorname" Content="Vorname:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="65" Height="25" Grid.Row="1"/>
                 <TextBox x:Name="txt_Vorname" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" Text="{Binding SchuelerProp.Vorname}"/>
                 <Label x:Name="Label_Nachname" Grid.Row="2" Content="Nachname:" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="75" Height="25"/>
                 <TextBox x:Name="txt_Nachname" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" Text="{Binding SchuelerProp.Nachname}" />
                 <Label x:Name="Label_GeborenAm" Content="geboren am:" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="85" />
-                <TextBox x:Name="txt_GeborenAm" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="10,0,0,0" />
+                <TextBox x:Name="txt_GeborenAm" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="10,0,0,0" Text="{Binding SchuelerProp.GeborenAm}" />
                 <Label x:Name="Label_In" Content="in:" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Width="65" Height="25" />
-                <TextBox x:Name="txt_In" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="25" Margin="10,0,0,0" />
+                <TextBox x:Name="txt_In" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Height="25" Margin="10,0,0,0" Text="{Binding SchuelerProp.GeburtsOrt}" />
                 <Label x:Name="Label_Anschrift" Grid.Row="5" Content="Anschrift:" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="65" Height="25"/>
-                <TextBox x:Name="txt_Anschrift1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="10,0,0,0"/>
-                <TextBox x:Name="txt_Anschrift2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right" Height="25" Width="35" Margin="10,0,25,0" />
+                <TextBox x:Name="txt_Anschrift1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Margin="10,0,0,0" Text="{Binding SchuelerProp.Anschrift1}"/>
+                <TextBox x:Name="txt_Anschrift2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right" Height="25" Width="35" Margin="10,0,25,0" Text="{Binding SchuelerProp.Anschrift2}" TextAlignment="Center" />
                 <Label x:Name="Label_Telefon" Content="Telefon:" Grid.Row="6" Height="25" Width="60" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="txt_Telefon" Grid.Row="6" Height="25" Margin="10,0,0,0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox x:Name="txt_Telefon" Grid.Row="6" Height="25" Margin="10,0,0,0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding SchuelerProp.TelNr}"/>
                 <Label x:Name="Label_EMail" Grid.Row="7" Content="E-Mail:" VerticalAlignment="Center" HorizontalAlignment="Left" Width="65" Height="25" />
-                <TextBox x:Name="txt_EMail" Grid.Row="7" Height="25" Margin="10,0,0,0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox x:Name="txt_EMail" Grid.Row="7" Height="25" Margin="10,0,0,0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding SchuelerProp.EMail}"/>
 
 
             </Grid>
@@ -63,7 +67,10 @@
                 <Label x:Name="Label_Schuljahr" Content="Schuljahr:" Height="30" Width="60"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
                 <TextBox x:Name="txt_Schuljahr" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0"/>
                 <Label x:Name="Label_Klasse" Content="Klasse:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="65" Height="25" Grid.Row="1"/>
-                <TextBox x:Name="txt_Klasse" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0"/>
+                <!--<TextBox x:Name="txt_Klasse" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" Text="{Binding KlasseProp.KlassenName}"/>-->
+                <ComboBox x:Name="combo_Klassen" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0">
+                    
+                </ComboBox>
                 <Label x:Name="Label_Ausbildungsbetrieb" Grid.Row="2" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="2" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
