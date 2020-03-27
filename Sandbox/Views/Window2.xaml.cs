@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,8 @@ namespace Sandbox.Views
         public Window2()
         {
             InitializeComponent();
+            MainViewModel_Window2 vm = new MainViewModel_Window2();
+            this.DataContext = vm; 
         }
         protected override void OnClosed(EventArgs e)
         {

@@ -100,6 +100,7 @@
     <Compile Include="ViewModels\MainViewModel_DeleteStudent.cs" />
     <Compile Include="ViewModels\MainViewModel_FirstWindow.cs" />
     <Compile Include="ViewModels\MainViewModel_Formular.cs" />
+    <Compile Include="ViewModels\MainViewModel_Window2.cs" />
     <Compile Include="Views\DeleteStudent.xaml.cs">
       <DependentUpon>DeleteStudent.xaml</DependentUpon>
     </Compile>

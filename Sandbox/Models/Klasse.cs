@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,10 @@ namespace Sandbox.Models
     public class Klasse
     {
         //Eigenschaften: 
-        public List KlassenNamen { get; set;}
-
+        public String KlassenNamen { get; set;}
+        public String KlassenID { get; set; }
+        public DataView ItemSource { get; set; } 
+        public int KlassenIDFK { get;set;}
 
         //Konstruktor: 
         public Klasse()

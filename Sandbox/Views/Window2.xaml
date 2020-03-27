@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sandbox"
+        xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
         Title="Noten-Formular" Height="400" Width="700">
+    <Window.DataContext>
+        <vm:MainViewModel_Window2/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.25*"/>
