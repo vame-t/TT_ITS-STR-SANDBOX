@@ -65,15 +65,54 @@
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label x:Name="Label_Schuljahr" Content="Schuljahr:" Height="30" Width="60"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
-                <TextBox x:Name="txt_Schuljahr" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0"/>
+                <!--<TextBox x:Name="txt_Schuljahr" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0"/>-->
+                <ComboBox x:Name="combo_Schuljahr" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" 
+                          ItemsSource="{Binding Path=SchuljahrProp.ItemSource}" 
+                          DisplayMemberPath="{Binding Path=SchuljahrProp.SchulJahrProperty}"
+                          SelectedValue="{Binding Path=SchuljahrProp.SchulJahrIDFK}" 
+                          SelectedValuePath="{Binding Path=SchuljahrProp.SchulJahrID}">
+                </ComboBox>
                 <Label x:Name="Label_Klasse" Content="Klasse:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="65" Height="25" Grid.Row="1"/>
                 <!--<TextBox x:Name="txt_Klasse" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" Text="{Binding KlasseProp.KlassenName}"/>-->
-                <ComboBox x:Name="combo_Klassen" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" DisplayMemberPath="{Binding Path=KlasseProp.KlassenNamen}"
-                          ItemsSource="{Binding Path=KlasseProp.ItemSource}" SelectedValuePath="{Binding Path=KlasseProp.KlassenID}" SelectedValue="{Binding KlasseProp.KlassenIDFK}">
+                <ComboBox x:Name="combo_Klassen" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" 
+                          ItemsSource="{Binding Path=KlasseProp.ItemSource}" 
+                          DisplayMemberPath="{Binding Path=KlasseProp.KlassenNamen}"
+                          SelectedValue="{Binding KlasseProp.KlassenIDFK}"
+                          SelectedValuePath="{Binding Path=KlasseProp.KlassenID}">
+                </ComboBox>
+                <Label x:Name="Label_VorhandeneAusbildungsbetriebe" Grid.Row="2" Content="Vorhandene Betriebe:" Width="125" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="combo_Ausbildungsbetriebe" Grid.Row="2" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right"
+                          ItemsSource="{Binding Path=BetriebProp.ItemSource}"
+                          DisplayMemberPath="{Binding Path=BetriebProp.BetriebsName}"
+                          SelectedItem="{Binding Path=BetriebProp.BetriebsIDFK}"
+                          SelectedValuePath="{Binding Path=BetriebProp.BetriebsID}">
                     
                 </ComboBox>
-                <Label x:Name="Label_Ausbildungsbetrieb" Grid.Row="2" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="2" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <Label x:Name="Label_Ausbildungsbetrieb" Grid.Row="3" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="3" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=BetriebProp.NewBetrieb}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <Style.Resources>
+                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <Label Content="Nur ausfüllen, wenn neu" Foreground="LightGray" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Style.Resources>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
 
             </Grid>
         </GroupBox>

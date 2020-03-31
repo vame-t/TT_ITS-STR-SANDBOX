@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Sandbox.Models
         public int Anschrift2 { get; set;}
         public String TelNr {get; set;}
         public String EMail {get; set;}
+        public DataView ItemSource { get; set; }
+        public String SchuelerID { get; set; }
 
         //Konstruktor: 
         public Schueler()

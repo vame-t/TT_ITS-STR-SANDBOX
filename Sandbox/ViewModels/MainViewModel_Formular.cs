@@ -14,7 +14,7 @@ namespace Sandbox.ViewModels
    public class MainViewModel_Formular : INotifyPropertyChanged
     {
         //MySqlConnection aufbauen
-        static String connectionString = "SERVER=127.0.0.1;DATABASE=zeugnisdb;UID=root;PASSWORD=;";
+        static String connectionString = "SERVER=127.0.0.1;DATABASE=studentmanagement-db;UID=root;PASSWORD=;";
         MySqlConnection mySqlConnection = new MySqlConnection(connectionString); 
             
         //Implementierung des Interfaces: 
@@ -25,7 +25,9 @@ namespace Sandbox.ViewModels
         private bool anredeFrau; 
         public Window2 notenFormular = new Window2(); 
         private Schueler schueler = new Schueler();
-        private Klasse klasse = new Klasse(); 
+        private Klasse klasse = new Klasse();
+        private Schuljahr schulJahr = new Schuljahr();
+        private Betrieb betrieb = new Betrieb(); 
         private ICommand saveCommand;
         private ICommand nextCommand;
         
@@ -49,6 +51,19 @@ namespace Sandbox.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("KlasseProp"));
             }
 
+        }
+        public Schuljahr SchuljahrProp
+        {
+            get { return schulJahr; }
+            set { schulJahr = value;}
+        }
+        public Betrieb BetriebProp
+        {
+            get { return betrieb; }
+            set {
+                betrieb = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("BetriebProp")); 
+            } 
         }
         public bool AnredeHerr
         {
@@ -86,7 +101,9 @@ namespace Sandbox.ViewModels
         //Konstruktor:
         public MainViewModel_Formular()
         {
-            putClassesIntoComboBox();        
+            putClassesIntoComboBox();
+            putSchoolYearIntoComboBox();
+            putCompanyIntoComboBox(); 
         }
 
         //Methoden:
@@ -102,7 +119,8 @@ namespace Sandbox.ViewModels
         {
             decideAnrede();
             mySqlConnection.Open();
-            string query = "INSERT INTO `studentmanagement-db`.`tbl_student` (`Anrede`,`Nachname`, `Vorname`, `Geburtsdatum`,`Geburtsort`,`Anschrift_1`,`Anschrift_2`,`Telefonnummer`,`EMail`) VALUES(@Anrede,@Nachname,@Vorname,@Geburtsdatum,@Geburtsort,@Anschrift_1,@Anschrift_2,@Telefonnummer,@EMail);";
+            string query = "INSERT INTO `studentmanagement-db`.`tbl_student` (`Anrede`,`Nachname`, `Vorname`, `Geburtsdatum`,`Geburtsort`,`Anschrift_1`,`Anschrift_2`,`Telefonnummer`,`EMail`,`FK_Klasse`,`FK_Schuljahr`) " +
+                           "VALUES(@Anrede,@Nachname,@Vorname,@Geburtsdatum,@Geburtsort,@Anschrift_1,@Anschrift_2,@Telefonnummer,@EMail,@FK_Klasse,@FK_Schuljahr);";
             MySqlCommand command = new MySqlCommand(query, mySqlConnection);
             command.Parameters.AddWithValue("@Anrede", SchuelerProp.Anrede); 
             command.Parameters.AddWithValue("@Nachname",SchuelerProp.Nachname);
@@ -113,16 +131,25 @@ namespace Sandbox.ViewModels
             command.Parameters.AddWithValue("@Anschrift_2", SchuelerProp.Anschrift2);
             command.Parameters.AddWithValue("@Telefonnummer",SchuelerProp.TelNr);
             command.Parameters.AddWithValue("@EMail",SchuelerProp.EMail);
-            //command.Parameters.AddWithValue("@FK_Klasse", KlasseProp.KlassenIDFK);
-            //Query2 unnötig, Klassen sollen schon im vorraus selektierbar sein´, es sollen keine neuen Klassen erstellt werden, wird eine neue Klasse erstellt dann ein neuer Eintrag in die Datenbank. 
-            //string query2 = "INSERT INTO `zeugnisdb`.`tbl_klasse` (`NameKlasse`) VALUES (@NameKlasse);";
-            //MySqlCommand command2 = new MySqlCommand(query2, mySqlConnection);
-            //command2.Parameters.AddWithValue("@NameKlasse", KlasseProp.KlassenName);
+            command.Parameters.AddWithValue("@FK_Klasse", KlasseProp.KlassenIDFK);
+            command.Parameters.AddWithValue("@FK_Schuljahr", SchuljahrProp.SchulJahrIDFK);
+            //command.Parameters.AddWithValue("@FK_Betrieb", BetriebProp.BetriebsIDFK);
             command.ExecuteNonQuery();
-            //command2.ExecuteNonQuery(); 
+            //if (BetriebProp.BetriebsIDFK == 0) //Hier muss eine andere Bedingung rein, denn diese Property wird mit dem click verändert auch wenn sie anfangs 0 sein sollte. 2 Felder bedeuten 2 Properties also eventuell noch eine Property erstellen
+            //{
+            //    string query2 = "INSERT INTO `studentmanagement-db`.`tbl_Betrieb` (`BetriebsName`) VALUES(@BetriebsName)"; 
+            //    MySqlCommand command2 = new MySqlCommand(query2, mySqlConnection);
+            //    command2.Parameters.AddWithValue("@BetriebsName",BetriebProp.NewBetrieb);
+            //    command2.ExecuteNonQuery();
+
+            //    string query3 = "INSERT INTO `studentmanagement-db`.`tbl_student` (`FK_Betrieb`) VALUES(@FK_Betrieb)";
+            //    MySqlCommand command3 = new MySqlCommand(query3, mySqlConnection);
+            //    command3.Parameters.AddWithValue("@FK_Betrieb", BetriebProp.BetriebsIDFK);
+            //    command3.ExecuteNonQuery(); 
+            //}
+
             MessageBox.Show("Alle Daten wurden vollständig hinzugefügt", "Info",MessageBoxButton.OK, MessageBoxImage.Information);
             mySqlConnection.Close(); 
-
         }
 
         public void decideAnrede()
@@ -137,7 +164,7 @@ namespace Sandbox.ViewModels
             }
             else
             {
-                MessageBox.Show("Bitte wählen Sie unter 'Anrede' eines der Optionen aus! ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); 
+                //MessageBox.Show("Bitte wählen Sie unter 'Anrede' eines der Optionen aus! ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning); 
             }
 
         }
@@ -146,8 +173,7 @@ namespace Sandbox.ViewModels
         {
             try
             {
-                //mySqlConnection.Open();
-                //Formular formular = new Formular(); 
+                
                 string query = "SELECT * FROM `studentmanagement-db`.tbl_class;";
                 MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(query, mySqlConnection);
 
@@ -155,7 +181,6 @@ namespace Sandbox.ViewModels
                 {
                     DataTable classTable = new DataTable();
                     sqlDataAdapter.Fill(classTable);
-                    //formular.combo_Klassen.DisplayMemberPath = "ClassName";
                     KlasseProp.KlassenNamen = "ClassName";
                     KlasseProp.ItemSource = classTable.DefaultView;
                     KlasseProp.KlassenID = "tbl_class_id";
@@ -168,29 +193,54 @@ namespace Sandbox.ViewModels
             }
         }
 
+        public void putSchoolYearIntoComboBox()
+        {
+            try
+            {
+                string query = "SELECT * FROM `studentmanagement-db`.tbl_schuljahr;";
+                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(query, mySqlConnection);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable schoolYearTable = new DataTable();
+                    sqlDataAdapter.Fill(schoolYearTable);
+                    SchuljahrProp.SchulJahrProperty = "Schuljahr";
+                    SchuljahrProp.ItemSource = schoolYearTable.DefaultView;
+                    SchuljahrProp.SchulJahrID = "tbl_Schuljahr_id"; 
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.StackTrace);
+            }
+        }
+
+        public void putCompanyIntoComboBox()
+        {
+            try
+            {
+                string query = "SELECT * FROM `studentmanagement-db`.tbl_betrieb;";
+                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(query, mySqlConnection);
+
+                using (sqlDataAdapter)
+                {
+                    DataTable companyTable = new DataTable();
+                    sqlDataAdapter.Fill(companyTable);
+                    BetriebProp.BetriebsName = "BetriebsName";
+                    BetriebProp.ItemSource = companyTable.DefaultView;
+                    BetriebProp.BetriebsID = "tbl_Betrieb_id";
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.StackTrace);
+            }
+        }
+
 
     }
 
-    //Versuche: Combobox Auswahl: 
-    //private ObservableCollection<Schueler> schuelerAnrede;
-    //private Schueler selectedAnrede; 
-    //public ObservableCollection<Schueler> SchuelerAnrede
-    //{
-    //    get { return schuelerAnrede; }
-    //    set { schuelerAnrede = value; }
-    //}
-    //public Schueler SelectedAnrede
-    //{
-    //    get { return selectedAnrede;}
-    //    set { selectedAnrede = value; }
-    //}
-
-        //protected void NotifyOfPropertyChange(string name)
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null)
-        //    {
-        //        handler(this, new PropertyChangedEventArgs(name));
-        //    }
-        //}
+   
 }
