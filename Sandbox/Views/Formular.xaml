@@ -84,9 +84,8 @@
                 <ComboBox x:Name="combo_Ausbildungsbetriebe" Grid.Row="2" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right"
                           ItemsSource="{Binding Path=BetriebProp.ItemSource}"
                           DisplayMemberPath="{Binding Path=BetriebProp.BetriebsName}"
-                          SelectedItem="{Binding Path=BetriebProp.BetriebsIDFK}"
+                          SelectedValue="{Binding Path=BetriebProp.BetriebsIDFK}"
                           SelectedValuePath="{Binding Path=BetriebProp.BetriebsID}">
-                    
                 </ComboBox>
                 <Label x:Name="Label_Ausbildungsbetrieb" Grid.Row="3" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="3" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=BetriebProp.NewBetrieb}">

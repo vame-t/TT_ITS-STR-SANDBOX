@@ -62,7 +62,7 @@ namespace Sandbox.ViewModels
             get { return betrieb; }
             set {
                 betrieb = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("BetriebProp")); 
+                     PropertyChanged(this, new PropertyChangedEventArgs("BetriebProp")); 
             } 
         }
         public bool AnredeHerr
@@ -119,8 +119,8 @@ namespace Sandbox.ViewModels
         {
             decideAnrede();
             mySqlConnection.Open();
-            string query = "INSERT INTO `studentmanagement-db`.`tbl_student` (`Anrede`,`Nachname`, `Vorname`, `Geburtsdatum`,`Geburtsort`,`Anschrift_1`,`Anschrift_2`,`Telefonnummer`,`EMail`,`FK_Klasse`,`FK_Schuljahr`) " +
-                           "VALUES(@Anrede,@Nachname,@Vorname,@Geburtsdatum,@Geburtsort,@Anschrift_1,@Anschrift_2,@Telefonnummer,@EMail,@FK_Klasse,@FK_Schuljahr);";
+            string query = "INSERT INTO `studentmanagement-db`.`tbl_student` (`Anrede`,`Nachname`, `Vorname`, `Geburtsdatum`,`Geburtsort`,`Anschrift_1`,`Anschrift_2`,`Telefonnummer`,`EMail`,`FK_Klasse`,`FK_Schuljahr`,`FK_Betrieb`) " +
+                           "VALUES(@Anrede,@Nachname,@Vorname,@Geburtsdatum,@Geburtsort,@Anschrift_1,@Anschrift_2,@Telefonnummer,@EMail,@FK_Klasse,@FK_Schuljahr,@FK_Betrieb);";
             MySqlCommand command = new MySqlCommand(query, mySqlConnection);
             command.Parameters.AddWithValue("@Anrede", SchuelerProp.Anrede); 
             command.Parameters.AddWithValue("@Nachname",SchuelerProp.Nachname);
@@ -133,21 +133,9 @@ namespace Sandbox.ViewModels
             command.Parameters.AddWithValue("@EMail",SchuelerProp.EMail);
             command.Parameters.AddWithValue("@FK_Klasse", KlasseProp.KlassenIDFK);
             command.Parameters.AddWithValue("@FK_Schuljahr", SchuljahrProp.SchulJahrIDFK);
-            //command.Parameters.AddWithValue("@FK_Betrieb", BetriebProp.BetriebsIDFK);
+            command.Parameters.AddWithValue("@FK_Betrieb", BetriebProp.BetriebsIDFK);
             command.ExecuteNonQuery();
-            //if (BetriebProp.BetriebsIDFK == 0) //Hier muss eine andere Bedingung rein, denn diese Property wird mit dem click verändert auch wenn sie anfangs 0 sein sollte. 2 Felder bedeuten 2 Properties also eventuell noch eine Property erstellen
-            //{
-            //    string query2 = "INSERT INTO `studentmanagement-db`.`tbl_Betrieb` (`BetriebsName`) VALUES(@BetriebsName)"; 
-            //    MySqlCommand command2 = new MySqlCommand(query2, mySqlConnection);
-            //    command2.Parameters.AddWithValue("@BetriebsName",BetriebProp.NewBetrieb);
-            //    command2.ExecuteNonQuery();
-
-            //    string query3 = "INSERT INTO `studentmanagement-db`.`tbl_student` (`FK_Betrieb`) VALUES(@FK_Betrieb)";
-            //    MySqlCommand command3 = new MySqlCommand(query3, mySqlConnection);
-            //    command3.Parameters.AddWithValue("@FK_Betrieb", BetriebProp.BetriebsIDFK);
-            //    command3.ExecuteNonQuery(); 
-            //}
-
+           
             MessageBox.Show("Alle Daten wurden vollständig hinzugefügt", "Info",MessageBoxButton.OK, MessageBoxImage.Information);
             mySqlConnection.Close(); 
         }
@@ -241,6 +229,19 @@ namespace Sandbox.ViewModels
 
 
     }
+    //if (BetriebProp.BetriebsIDFK == 0) //Hier muss eine andere Bedingung rein, denn diese Property wird mit dem click verändert auch wenn sie anfangs 0 sein sollte. 2 Felder bedeuten 2 Properties also eventuell noch eine Property erstellen
+    //{
+    //    string query2 = "INSERT INTO `studentmanagement-db`.`tbl_Betrieb` (`BetriebsName`) VALUES(@BetriebsName)"; 
+    //    MySqlCommand command2 = new MySqlCommand(query2, mySqlConnection);
+    //    command2.Parameters.AddWithValue("@BetriebsName",BetriebProp.NewBetrieb);
+    //    command2.ExecuteNonQuery();
 
-   
+    //    string query3 = "INSERT INTO `studentmanagement-db`.`tbl_student` (`FK_Betrieb`) VALUES(@FK_Betrieb)";
+    //    MySqlCommand command3 = new MySqlCommand(query3, mySqlConnection);
+    //    command3.Parameters.AddWithValue("@FK_Betrieb", BetriebProp.BetriebsIDFK);
+    //    command3.ExecuteNonQuery(); 
+    //}
+
+
+
 }
