@@ -15,7 +15,7 @@ namespace Sandbox.Models
         public String BetriebsID { get; set; }
         public int BetriebsIDFK { get; set; }
         public DataView ItemSource { get; set; }
-        private String Standort { get; set;  }
+        public String Standort { get; set;  }
 
     }
 }

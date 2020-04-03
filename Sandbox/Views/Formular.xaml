@@ -87,8 +87,17 @@
                           SelectedValue="{Binding Path=BetriebProp.BetriebsIDFK}"
                           SelectedValuePath="{Binding Path=BetriebProp.BetriebsID}">
                 </ComboBox>
-                <Label x:Name="Label_Ausbildungsbetrieb" Grid.Row="3" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="3" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=BetriebProp.NewBetrieb}">
+                
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Neuen Betrieb hinzufügen:" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,70" Height="120" Width="300" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="Label_Ausbildungsbetrieb" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0"/>
+                <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="0" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=BetriebProp.NewBetrieb}">
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>
@@ -112,9 +121,12 @@
                         </Style>
                     </TextBox.Style>
                 </TextBox>
+                <Label x:Name="Label_Standort" Grid.Row="1" Height="30" Width="120" Content="Standort:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBox x:Name="txt_Standort" Grid.Row="1" Height="25" Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Path=BetriebProp.Standort}"/>
 
             </Grid>
         </GroupBox>
+        
         <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" Content="Speichern" Width="100" Height="25" Command="{Binding Path=SaveCommand}"/>
         <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Content="Weiter" Width="100" Height="25" Command="{Binding Path=NextCommand}"/>
     </Grid>

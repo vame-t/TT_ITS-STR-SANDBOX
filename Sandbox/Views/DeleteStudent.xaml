@@ -14,16 +14,22 @@
         <GroupBox Margin="20">
             <Grid>
                 <Label Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Klasse auswählen:" Width="110" Height="25" FontWeight="Bold"/>
-                <ComboBox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="75,10,10,10" Width="150" Height="25"
+                <ComboBox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20,10,10,10" Width="100" Height="25"
                           ItemsSource="{Binding Path=KlasseProp.ItemSource}" 
+                          SelectedItem="{Binding MySelectedItem}"
                           DisplayMemberPath="{Binding Path=KlasseProp.KlassenNamen}"
                           SelectedValue="{Binding KlasseProp.KlassenIDFK}"
                           SelectedValuePath="{Binding Path=KlasseProp.KlassenID}"
                           >
                 </ComboBox>
-                <ListBox Margin="50,100,50,75"
-                         ItemsSource="{Binding SchuelerProp.ItemSource}"
-                         DisplayMemberPath="{Binding SchuelerProp.Vorname}"
+                <Button x:Name="Button_Search" Content="search" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Height="25" Margin="20,10,50,10" VerticalContentAlignment="Center"
+                        Command="{Binding Path=SearchCommand}"/>
+
+                <ListBox x:Name="Listbox_Students" Margin="50,100,50,75"
+                         ItemsSource="{Binding Path=SchuelerProp.ItemSource}"
+                         DisplayMemberPath="{Binding Path=SchuelerProp.Vorname}"
+                         SelectedValuePath="{Binding Path=SchuelerProp.SchuelerID}"
+                         
                         >
                 </ListBox>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,115,5" Content="Löschen"/>
