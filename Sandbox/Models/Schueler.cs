@@ -23,6 +23,8 @@ namespace Sandbox.Models
         public String EMail {get; set;}
         public DataView ItemSource { get; set; }
         public String SchuelerID { get; set; }
+        public int Schueler_ID { get; set; }
+        public DataTable SchuelerTable { get; set; }
 
         //Konstruktor: 
         public Schueler()

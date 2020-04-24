@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using MySql.Data.MySqlClient;
 using Sandbox.Models;
 using System;
@@ -19,13 +19,23 @@ namespace Sandbox.ViewModels
         //Implementierung des Interfaces: 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected void NotifyOfPropertyChange(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
         //MySqlConnection aufbauen
         static String connectionString = "SERVER=127.0.0.1;DATABASE=studentmanagement-db;UID=root;PASSWORD=;";
         MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
 
         //Fields: 
         private ICommand closeCommand;
-        private ICommand searchCommand; 
+        private ICommand searchCommand;
+        private ICommand deleteCommand;
         private Klasse klasse = new Klasse();
         private Schueler schueler = new Schueler();
         //Properties: 
@@ -37,7 +47,7 @@ namespace Sandbox.ViewModels
                 {
                     closeCommand = new RelayCommand(() => closeWindow());
                 }
-                return closeCommand; 
+                return closeCommand;
             }
         }
         public ICommand SearchCommand
@@ -51,18 +61,33 @@ namespace Sandbox.ViewModels
                 return searchCommand;
             }
         }
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (deleteCommand == null)
+                {
+                    deleteCommand = new RelayCommand(() => deleteStudent());
+                }
+                return deleteCommand;
+            }
+        }
         public Klasse KlasseProp
         {
             get { return klasse; }
-            set { klasse = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("KlasseProp"));
+            set
+            {
+                klasse = value;
+                NotifyOfPropertyChange("KlasseProp");
             }
         }
         public Schueler SchuelerProp
         {
             get { return schueler; }
-            set { schueler = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("SchuelerProp"));
+            set
+            {
+                schueler = value;
+                NotifyOfPropertyChange("SchuelerProp");
             }
         }
 
@@ -70,7 +95,7 @@ namespace Sandbox.ViewModels
         public MainViewModel_DeleteStudent()
         {
             putClassesIntoComboBox();
-           
+
         }
 
         //Methods: 
@@ -110,21 +135,22 @@ namespace Sandbox.ViewModels
             {
 
                 mySqlConnection.Open();
-                        string query = "SELECT `tbl_student`.`Vorname` FROM `studentmanagement-db`.tbl_student WHERE FK_Klasse= @FK_Klasse;";
-                        MySqlCommand command = new MySqlCommand(query, mySqlConnection);
-                        MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
-                        using (sqlDataAdapter)
-                        {
-                        command.Parameters.AddWithValue("@FK_Klasse", KlasseProp.KlassenIDFK);
-                        command.ExecuteNonQuery(); 
-                            DataTable studentTable = new DataTable();
-                            sqlDataAdapter.Fill(studentTable);
-                            var result = studentTable; 
-                            SchuelerProp.Vorname = "Vorname";
-                            SchuelerProp.ItemSource = studentTable.DefaultView;
-                            SchuelerProp.SchuelerID = "tbl_student_id";
-                        }
-                       
+                string query = "SELECT `tbl_student`.`Vorname` FROM `studentmanagement-db`.tbl_student WHERE FK_Klasse= @FK_Klasse;";
+                MySqlCommand command = new MySqlCommand(query, mySqlConnection);
+                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
+                using (sqlDataAdapter)
+                {
+                    command.Parameters.AddWithValue("@FK_Klasse", KlasseProp.KlassenIDFK);
+                    command.ExecuteNonQuery();
+                    DataTable studentTable = new DataTable();
+                    sqlDataAdapter.Fill(studentTable);
+                    var result = studentTable;
+                    SchuelerProp.Vorname = "Vorname";
+                    SchuelerProp.SchuelerID = "tbl_student_id";
+                    SchuelerProp.ItemSource = studentTable.DefaultView;
+                    NotifyOfPropertyChange("SchuelerProp");
+                }
+
             }
             catch (Exception)
             {
@@ -133,7 +159,36 @@ namespace Sandbox.ViewModels
             }
             finally
             {
-                mySqlConnection.Close(); 
+                mySqlConnection.Close();
+            }
+        }
+
+        public void deleteStudent()
+        {
+            try
+            {
+                mySqlConnection.Open();
+                              //DELETE FROM `studentmanagement-db`.`tbl_student` WHERE(`tbl_student_id` = '31');
+                string query = "DELETE FROM `studentmanagement-db`.`tbl_student` WHERE (`tbl_student_id` = @tbl_student_id);";
+                MySqlCommand command = new MySqlCommand(query, mySqlConnection);
+                SchuelerProp.SchuelerID = "tbl_student_id";
+                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
+                using (sqlDataAdapter)
+                {
+                    command.Parameters.AddWithValue("@tbl_student_id", SchuelerProp.Schueler_ID);
+                    command.ExecuteNonQuery();
+                    NotifyOfPropertyChange("SchuelerProp");
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                mySqlConnection.Close();
             }
         }
 
@@ -169,5 +224,14 @@ namespace Sandbox.ViewModels
     //         mySelectedItem = value;
     //         PropertyChanged(this, new PropertyChangedEventArgs("MySelectedItem"));
     //     }
+    //}
+
+    //protected void NotifyOfPropertyChange(string name)
+    //{
+    //    PropertyChangedEventHandler handler = PropertyChanged;
+    //    if (handler != null)
+    //    {
+    //        handler(this, new PropertyChangedEventArgs(name));
+    //    }
     //}
 }
