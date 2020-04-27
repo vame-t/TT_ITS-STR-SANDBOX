@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using Sandbox.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Sandbox.ViewModels
         //Fields: 
         private Schueler schueler = new Schueler();
         private Klasse klasse = new Klasse();
+        private ObservableCollection<Schueler> students = new ObservableCollection<Schueler>();
         private ICommand searchCommand;  
 
         //Properties: 
@@ -46,6 +48,15 @@ namespace Sandbox.ViewModels
             {
                 klasse = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("KlassenProp"));
+            }
+        }
+        public ObservableCollection<Schueler> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Students"));
             }
         }
 
@@ -95,7 +106,6 @@ namespace Sandbox.ViewModels
         {
             try
             {
-
                 mySqlConnection.Open();
                 string query = "SELECT `tbl_student`.`Vorname` FROM `studentmanagement-db`.tbl_student WHERE FK_Klasse= @FK_Klasse;";
                 MySqlCommand command = new MySqlCommand(query, mySqlConnection);
@@ -106,13 +116,23 @@ namespace Sandbox.ViewModels
                     command.ExecuteNonQuery();
                     DataTable studentTable = new DataTable();
                     sqlDataAdapter.Fill(studentTable);
-                    var result = studentTable;
-                    SchuelerProp.Vorname = "Vorname";
-                    SchuelerProp.SchuelerID = "tbl_student_id";
-                    SchuelerProp.ItemSource = studentTable.DefaultView;
-                    PropertyChanged(this, new PropertyChangedEventArgs("SchuelerProp"));
-                }
+                    if (students != null)
+                    {
+                        students.Clear();
+                    }
+                    foreach (DataRow dataRow in studentTable.Rows)
+                    {
+                        Schueler nschueler = new Schueler();
+                        nschueler.Vorname = Convert.ToString(dataRow["Vorname"]);
 
+                        students.Add(nschueler);
+                    }
+                    //SchuelerProp.Vorname = "Vorname";
+                    //SchuelerProp.SchuelerID = "tbl_student_id";
+                    //SchuelerProp.ItemSource = studentTable.DefaultView;
+                    //NotifyOfPropertyChange("SchuelerProp");
+
+                }
             }
             catch (Exception)
             {

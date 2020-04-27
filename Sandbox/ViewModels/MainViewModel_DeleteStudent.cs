@@ -38,6 +38,7 @@ namespace Sandbox.ViewModels
         private ICommand deleteCommand;
         private Klasse klasse = new Klasse();
         private Schueler schueler = new Schueler();
+        private ObservableCollection<Schueler> students = new ObservableCollection<Schueler>();
         //Properties: 
         public ICommand CloseCommand
         {
@@ -88,6 +89,15 @@ namespace Sandbox.ViewModels
             {
                 schueler = value;
                 NotifyOfPropertyChange("SchuelerProp");
+            }
+        }
+        public ObservableCollection<Schueler> Students
+        {
+            get { return students; }
+            set
+            {
+                students = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Students"));
             }
         }
 
@@ -144,11 +154,18 @@ namespace Sandbox.ViewModels
                     command.ExecuteNonQuery();
                     DataTable studentTable = new DataTable();
                     sqlDataAdapter.Fill(studentTable);
-                    var result = studentTable;
-                    SchuelerProp.Vorname = "Vorname";
-                    SchuelerProp.SchuelerID = "tbl_student_id";
-                    SchuelerProp.ItemSource = studentTable.DefaultView;
-                    NotifyOfPropertyChange("SchuelerProp");
+                    if (students != null)
+                    {
+                        students.Clear();
+                    }
+                    foreach (DataRow dataRow in studentTable.Rows)
+                    {
+                        Schueler nschueler = new Schueler();
+                        nschueler.Vorname = Convert.ToString(dataRow["Vorname"]);
+
+                        students.Add(nschueler);
+                    }
+                   
                 }
 
             }
@@ -163,21 +180,56 @@ namespace Sandbox.ViewModels
             }
         }
 
+        public void selectStudents()
+        {
+            try
+            {
+                
+                string query = "SELECT * FROM `studentmanagement-db`.tbl_student;";
+                MySqlCommand command = new MySqlCommand(query, mySqlConnection);
+                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
+                using (sqlDataAdapter)
+                {
+                    command.ExecuteNonQuery();
+                    DataTable studentTable = new DataTable();
+                    sqlDataAdapter.Fill(studentTable);
+                    if (students != null)
+                    {
+                        students.Clear();
+                    }
+                    foreach (DataRow dataRow in studentTable.Rows)
+                    {
+                        Schueler nschueler = new Schueler();
+                        nschueler.Vorname = Convert.ToString(dataRow["Vorname"]);
+
+                        students.Add(nschueler);
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void deleteStudent()
         {
             try
             {
                 mySqlConnection.Open();
-                              //DELETE FROM `studentmanagement-db`.`tbl_student` WHERE(`tbl_student_id` = '31');
-                string query = "DELETE FROM `studentmanagement-db`.`tbl_student` WHERE (`tbl_student_id` = @tbl_student_id);";
+                string query = "DELETE FROM `studentmanagement-db`.`tbl_student` WHERE (`Vorname` = @Vorname);";
                 MySqlCommand command = new MySqlCommand(query, mySqlConnection);
-                SchuelerProp.SchuelerID = "tbl_student_id";
+                command.Parameters.AddWithValue("@Vorname", SchuelerProp.Vorname);
                 MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
                 using (sqlDataAdapter)
                 {
-                    command.Parameters.AddWithValue("@tbl_student_id", SchuelerProp.Schueler_ID);
+
+                   
                     command.ExecuteNonQuery();
-                    NotifyOfPropertyChange("SchuelerProp");
+                    new PropertyChangedEventArgs("Students");
+
                 }
 
             }
@@ -188,6 +240,7 @@ namespace Sandbox.ViewModels
             }
             finally
             {
+                selectStudents(); 
                 mySqlConnection.Close();
             }
         }

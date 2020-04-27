@@ -24,7 +24,6 @@ namespace Sandbox.Models
         public DataView ItemSource { get; set; }
         public String SchuelerID { get; set; }
         public int Schueler_ID { get; set; }
-        public DataTable SchuelerTable { get; set; }
 
         //Konstruktor: 
         public Schueler()
@@ -32,6 +31,11 @@ namespace Sandbox.Models
 
         }
         //Methoden: 
+
+        public override string ToString()
+        {
+            return Vorname;
+        }
 
 
 

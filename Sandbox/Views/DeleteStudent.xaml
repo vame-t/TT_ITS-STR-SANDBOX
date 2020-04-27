@@ -23,22 +23,17 @@
                           ItemsSource="{Binding Path=KlasseProp.ItemSource}" 
                           DisplayMemberPath="{Binding Path=KlasseProp.KlassenNamen}"
                           SelectedValue="{Binding KlasseProp.KlassenIDFK}"
-                          SelectedValuePath="{Binding Path=KlasseProp.KlassenID}"
-                          
-                          >
+                          SelectedValuePath="{Binding Path=KlasseProp.KlassenID}">
                 </ComboBox>
                 <Button x:Name="Button_Search" Content="search" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Height="25" Margin="20,10,50,10" VerticalContentAlignment="Center"
                         Command="{Binding Path=SearchCommand}"/>
 
                 <ListBox x:Name="Listbox_Students" Margin="50,100,50,75"
-                         ItemsSource="{Binding Path=SchuelerProp.ItemSource}"
-                         DisplayMemberPath="{Binding Path=SchuelerProp.Vorname}"
-                         SelectedValuePath="{Binding Path=SchuelerProp.Schueler_ID}"
-                         SelectedValue="{Binding Path=SchuelerProp.SchuelerID}"
-                         
+                         ItemsSource="{Binding Path=Students}"
+                         SelectedValue="{Binding Path=SchuelerProp.Vorname}"
                         >
                 </ListBox>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,115,5" Content="Löschen" Command="{Binding Path=DeleteCommand}"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,115,5" Content="Löschen" Command="{Binding Path=DeleteCommand}" CommandParameter="{Binding ElementName=Listbox_Students, Path=SelectedItem}"/>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,20,5" Content="Schließen" Command="{Binding CloseCommand}"/>
                 
             </Grid>
@@ -49,3 +44,5 @@
     </Grid>
     
 </Window>
+
+                         

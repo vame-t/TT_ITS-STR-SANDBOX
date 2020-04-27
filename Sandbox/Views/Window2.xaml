@@ -32,10 +32,8 @@
         <StackPanel x:Name="Stackpanel_Schüler" Margin="10,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="340" Height="30" Orientation="Horizontal" >
             <Label Content="Auswahl Schüler/in:" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Background="LightGray"/>
             <ComboBox Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25"
-                         ItemsSource="{Binding Path=SchuelerProp.ItemSource}"
-                         DisplayMemberPath="{Binding Path=SchuelerProp.Vorname}"
-                         SelectedValuePath="{Binding Path=SchuelerProp.SchuelerID}"
-                         SelectedValue="{Binding Path=SchuelerProp.Schueler_ID}">
+                         ItemsSource="{Binding Path=Students}"
+                         >
             </ComboBox>
         </StackPanel>
         <Label Margin="10,10,0,0" Grid.Row="1" Width="220" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Schriftliche Noten in den Fächern:" Background="LightGray"/>
