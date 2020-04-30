@@ -226,12 +226,25 @@ namespace Sandbox.ViewModels
                 using (sqlDataAdapter)
                 {
 
-                   
-                    command.ExecuteNonQuery();
-                    new PropertyChangedEventArgs("Students");
+                    if (SchuelerProp.Vorname == null)
+                    {
+                        MessageBox.Show("Sie müssen eine Person auswählen","Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show("Möchten Sie wirklich die ausgewählte Person aus dem System entfernen", "Warning", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            command.ExecuteNonQuery();
+                            new PropertyChangedEventArgs("Students");
 
+                        }
+                        else if (result == MessageBoxResult.No || result == MessageBoxResult.Cancel)
+                        {
+
+                        }
+                    }
                 }
-
             }
             catch (Exception)
             {
@@ -244,47 +257,6 @@ namespace Sandbox.ViewModels
                 mySqlConnection.Close();
             }
         }
-
-
     }
-
-
-    //private String mySelectedItem;
-    //private ObservableCollection<Klasse> values = new ObservableCollection<Klasse>()
-    //{
-    //  //Hier sollen alles Klassen eingetragen werden also die Klassen Namen 
-
-    //};
-    // public String MySelectedItem
-    // {
-    //     get { return mySelectedItem; }
-    //     set
-    //     {
-    //         if (KlasseProp.KlassenIDFK >=1)
-    //         {
-    //             string query = "SELECT Vorname FROM `studentmanagement-db`.tbl_student;";
-    //             MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(query, mySqlConnection);
-    //             using (sqlDataAdapter)
-    //             {
-    //                 DataTable studentTable = new DataTable();
-    //                 sqlDataAdapter.Fill(studentTable);
-    //                 SchuelerProp.Vorname = "Vorname";
-    //                 SchuelerProp.ItemSource = studentTable.DefaultView;
-    //                 SchuelerProp.SchuelerID = "tbl_student_id";
-
-    //             }
-    //         }
-    //         mySelectedItem = value;
-    //         PropertyChanged(this, new PropertyChangedEventArgs("MySelectedItem"));
-    //     }
-    //}
-
-    //protected void NotifyOfPropertyChange(string name)
-    //{
-    //    PropertyChangedEventHandler handler = PropertyChanged;
-    //    if (handler != null)
-    //    {
-    //        handler(this, new PropertyChangedEventArgs(name));
-    //    }
-    //}
+    
 }
