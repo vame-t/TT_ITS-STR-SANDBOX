@@ -25,16 +25,19 @@ namespace Sandbox.Views
             InitializeComponent();
             MainViewModel_Formular vm = new MainViewModel_Formular();
             this.DataContext = vm;
-            
+            if (vm.CloseAction == null)
+            {
+                vm.CloseAction = new Action(this.Close);
+            }
         }
 
 
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
+        //protected override void OnClosed(EventArgs e)
+        //{
+        //    base.OnClosed(e);
 
-            Application.Current.Shutdown();
-        }
+        //    Application.Current.Shutdown();
+        //}
 
     }
 }

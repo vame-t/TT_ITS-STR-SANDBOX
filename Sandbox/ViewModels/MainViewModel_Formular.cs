@@ -30,8 +30,10 @@ namespace Sandbox.ViewModels
         private Betrieb betrieb = new Betrieb(); 
         private ICommand saveCommand;
         private ICommand nextCommand;
-        
+        private ICommand backCommand;
+
         //Properties:
+        public Action CloseAction { get; set; }
         public Schueler SchuelerProp
         {
             get { return schueler; }
@@ -96,6 +98,17 @@ namespace Sandbox.ViewModels
                     saveCommand = new RelayCommand(() => SaveStudentToDB());
                 }
                 return saveCommand; }
+        }
+        public ICommand BackCommand
+        {
+            get
+            {
+                if (backCommand == null)
+                {
+                    backCommand = new RelayCommand(() => backToMainWindow());
+                }
+                return backCommand;
+            }
         }
 
         //Konstruktor:
@@ -245,6 +258,16 @@ namespace Sandbox.ViewModels
             {
                 MessageBox.Show(e.StackTrace);
             }
+        }
+
+        public void backToMainWindow()
+        {
+            //TODO
+            FirstWindow mainWindow = new FirstWindow();
+            mainWindow.Show();
+            CloseAction();
+            //System.Windows.Application.Current.Shutdown();
+
         }
 
 

@@ -90,7 +90,7 @@
                 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Neuen Betrieb hinzufügen:" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,70" Height="120" Width="300" >
+        <!--<GroupBox Header="Neuen Betrieb hinzufügen:" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,70" Height="120" Width="300" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -125,9 +125,10 @@
                 <TextBox x:Name="txt_Standort" Grid.Row="1" Height="25" Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Path=BetriebProp.Standort}"/>
 
             </Grid>
-        </GroupBox>
-        
+        </GroupBox>-->
+
         <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" Content="Speichern" Width="100" Height="25" Command="{Binding Path=SaveCommand}"/>
+        <Button Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Content="Zurück" Width="100" Height="25" Command="{Binding Path=BackCommand}"/>
         <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Content="Weiter" Width="100" Height="25" Command="{Binding Path=NextCommand}"/>
     </Grid>
 </Window>

@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using MySql.Data.MySqlClient;
 using Sandbox.Models;
+using Sandbox.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,22 +34,23 @@ namespace Sandbox.ViewModels
         MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
 
         //Fields: 
-        private ICommand closeCommand;
-        private ICommand searchCommand;
         private ICommand deleteCommand;
+        private ICommand searchCommand;
+        private ICommand backCommand;
         private Klasse klasse = new Klasse();
         private Schueler schueler = new Schueler();
         private ObservableCollection<Schueler> students = new ObservableCollection<Schueler>();
         //Properties: 
-        public ICommand CloseCommand
+        public Action CloseAction { get; set; }
+        public ICommand BackCommand
         {
             get
             {
-                if (closeCommand == null)
+                if (backCommand == null)
                 {
-                    closeCommand = new RelayCommand(() => closeWindow());
+                    backCommand = new RelayCommand(() => backToMainWindow());
                 }
-                return closeCommand;
+                return backCommand;
             }
         }
         public ICommand SearchCommand
@@ -109,9 +111,13 @@ namespace Sandbox.ViewModels
         }
 
         //Methods: 
-        public void closeWindow()
+        public void backToMainWindow()
         {
-            System.Windows.Application.Current.Shutdown();
+            //TODO
+            FirstWindow mainWindow = new FirstWindow();
+            mainWindow.Show();
+            CloseAction(); 
+            //System.Windows.Application.Current.Shutdown();
 
         }
 

@@ -34,7 +34,7 @@
                         >
                 </ListBox>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,115,5" Content="Löschen" Command="{Binding Path=DeleteCommand}" CommandParameter="{Binding ElementName=Listbox_Students, Path=SelectedItem}"/>
-                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,20,5" Content="Schließen" Command="{Binding CloseCommand}"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="25" Margin="0,0,20,5" Content="Zurück" Command="{Binding BackCommand}"/>
                 
             </Grid>
         </GroupBox>

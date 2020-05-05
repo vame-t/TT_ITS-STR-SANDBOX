@@ -24,7 +24,11 @@ namespace Sandbox.Views
         {
             InitializeComponent();
             MainViewModel_DeleteStudent vm = new MainViewModel_DeleteStudent();
-            this.DataContext = vm; 
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+            {
+                vm.CloseAction = new Action(this.Close);
+            }
         }
 
     }
