@@ -52,8 +52,6 @@
                 <TextBox x:Name="txt_Telefon" Grid.Row="6" Height="25" Margin="10,0,0,0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding SchuelerProp.TelNr}"/>
                 <Label x:Name="Label_EMail" Grid.Row="7" Content="E-Mail:" VerticalAlignment="Center" HorizontalAlignment="Left" Width="65" Height="25" />
                 <TextBox x:Name="txt_EMail" Grid.Row="7" Height="25" Margin="10,0,0,0" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding SchuelerProp.EMail}"/>
-
-
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" HorizontalAlignment="Center" Height="200" Margin="20" VerticalAlignment="Top" Width="300">
@@ -65,7 +63,6 @@
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label x:Name="Label_Schuljahr" Content="Schuljahr:" Height="30" Width="60"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
-                <!--<TextBox x:Name="txt_Schuljahr" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0"/>-->
                 <ComboBox x:Name="combo_Schuljahr" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" 
                           ItemsSource="{Binding Path=SchuljahrProp.ItemSource}" 
                           DisplayMemberPath="{Binding Path=SchuljahrProp.SchulJahrProperty}"
@@ -73,60 +70,14 @@
                           SelectedValuePath="{Binding Path=SchuljahrProp.SchulJahrID}">
                 </ComboBox>
                 <Label x:Name="Label_Klasse" Content="Klasse:" HorizontalAlignment="Left" VerticalAlignment="Center" Width="65" Height="25" Grid.Row="1"/>
-                <!--<TextBox x:Name="txt_Klasse" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" Text="{Binding KlasseProp.KlassenName}"/>-->
                 <ComboBox x:Name="combo_Klassen" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Height="25" Width="150" Margin="10,0,0,0" 
                           ItemsSource="{Binding Path=KlasseProp.ItemSource}" 
                           DisplayMemberPath="{Binding Path=KlasseProp.KlassenNamen}"
                           SelectedValue="{Binding KlasseProp.KlassenIDFK}"
                           SelectedValuePath="{Binding Path=KlasseProp.KlassenID}">
                 </ComboBox>
-                <Label x:Name="Label_VorhandeneAusbildungsbetriebe" Grid.Row="2" Content="Vorhandene Betriebe:" Width="125" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="combo_Ausbildungsbetriebe" Grid.Row="2" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right"
-                          ItemsSource="{Binding Path=BetriebProp.ItemSource}"
-                          DisplayMemberPath="{Binding Path=BetriebProp.BetriebsName}"
-                          SelectedValue="{Binding Path=BetriebProp.BetriebsIDFK}"
-                          SelectedValuePath="{Binding Path=BetriebProp.BetriebsID}">
-                </ComboBox>
-                
             </Grid>
         </GroupBox>
-        <!--<GroupBox Header="Neuen Betrieb hinzufügen:" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,70" Height="120" Width="300" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Label x:Name="Label_Ausbildungsbetrieb" Content="Ausbildungsbetrieb:" Width="120" Height="30" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="0"/>
-                <TextBox x:Name="txt_Ausbildungsbetrieb" Grid.Row="0" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=BetriebProp.NewBetrieb}">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <Style.Resources>
-                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                    <VisualBrush.Visual>
-                                        <Label Content="Nur ausfüllen, wenn neu" Foreground="LightGray" />
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Style.Resources>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter Property="Background" Value="White" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-                <Label x:Name="Label_Standort" Grid.Row="1" Height="30" Width="120" Content="Standort:" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBox x:Name="txt_Standort" Grid.Row="1" Height="25" Width="150" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Path=BetriebProp.Standort}"/>
-
-            </Grid>
-        </GroupBox>-->
-
         <Button Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20" Content="Speichern" Width="100" Height="25" Command="{Binding Path=SaveCommand}"/>
         <Button Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20" Content="Zurück" Width="100" Height="25" Command="{Binding Path=BackCommand}"/>
         <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Content="Weiter" Width="100" Height="25" Command="{Binding Path=NextCommand}"/>
