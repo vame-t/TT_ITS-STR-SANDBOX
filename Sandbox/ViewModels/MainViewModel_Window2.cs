@@ -127,11 +127,6 @@ namespace Sandbox.ViewModels
 
                         students.Add(nschueler);
                     }
-                    //SchuelerProp.Vorname = "Vorname";
-                    //SchuelerProp.SchuelerID = "tbl_student_id";
-                    //SchuelerProp.ItemSource = studentTable.DefaultView;
-                    //NotifyOfPropertyChange("SchuelerProp");
-
                 }
             }
             catch (Exception)

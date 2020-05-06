@@ -6,125 +6,82 @@
         xmlns:local="clr-namespace:Sandbox"
         xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="Noten-Formular" Height="400" Width="700">
+        Title="Noten-Formular" Height="450" Width="750">
     <Window.DataContext>
         <vm:MainViewModel_Window2/>
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.25*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="Stackpanel_Klasse" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="370" Height="30" Orientation="Horizontal">
-            <Label Content="Auswahl der Klasse:" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Background="LightGray"/>
-            <ComboBox Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25"
-                      ItemsSource="{Binding Path=KlassenProp.ItemSource}"
-                      DisplayMemberPath="{Binding Path=KlassenProp.KlassenNamen}"
-                      SelectedValuePath="{Binding Path=KlassenProp.KlassenID}"
-                      SelectedValue="{Binding Path=KlassenProp.KlassenIDFK}">
-            </ComboBox>
-            <Button x:Name="btn_Search" Content="Search" Margin="10,0,10,0" Height="25" Command="{Binding Path=SearchCommand}"></Button>
-        </StackPanel>
-        <StackPanel x:Name="Stackpanel_Schüler" Margin="10,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="340" Height="30" Orientation="Horizontal" >
-            <Label Content="Auswahl Schüler/in:" Width="150" Height="25" VerticalAlignment="Center" HorizontalAlignment="Left" Background="LightGray"/>
-            <ComboBox Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="Label_Schulklasse" Content="Auswahl der Schulklasse:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="25" Margin="10,10,0,0" />
+                <ComboBox x:Name="Combo_Schulklasse" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="150" Margin="70,10,10,0" 
+                          ItemsSource="{Binding Path=KlassenProp.ItemSource}" 
+                          DisplayMemberPath="{Binding Path=KlassenProp.KlassenNamen}"
+                          SelectedValue="{Binding KlassenProp.KlassenIDFK}"
+                          SelectedValuePath="{Binding Path=KlassenProp.KlassenID}">
+                </ComboBox>
+                <Button x:Name="Button_Search" Content="Suche" FontStyle="Oblique" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="300,10,0,0" Height="25" Width="60" Command="{Binding Path=SearchCommand}"/>
+                <Label x:Name="Label_Students" Content="Auswahl Schüler/in:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="25" Margin="10,10,0,0" />
+                <ComboBox x:Name="Combo_Students" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="150" Margin="70,10,10,0" Grid.Row="1" 
                          ItemsSource="{Binding Path=Students}"
-                         >
-            </ComboBox>
-        </StackPanel>
-        <Label Margin="10,10,0,0" Grid.Row="1" Width="220" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Schriftliche Noten in den Fächern:" Background="LightGray"/>
-        <Label Margin="10" Grid.Row="1" Grid.Column="1" Width="65" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Endnote:" Background="LightGray"/>
-        <Label Margin="10,40,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="10,70,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="10,100,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="10,130,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="10,160,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="10,190,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="10,220,0,0" Grid.Row="1" Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray"/>
-        <Label Margin="240,10,0,0" Grid.Row="1" Width="110" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Mündliche Noten:" Background="LightGray"/>
-        <StackPanel Margin="10,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="SAE:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="110" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,3,5,2.4" Width="40" Height="25"/>
-        </StackPanel>
-        <StackPanel Margin="10,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="ITS:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="100" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-        </StackPanel>
-        <StackPanel Margin="10,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="BWL:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="100" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-        </StackPanel>
-        <StackPanel Margin="10,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="WI:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="100" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-        </StackPanel>
-        <StackPanel Margin="10,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="GK:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,160,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="100" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-        </StackPanel>
-        <StackPanel Margin="10,190,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="D:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,190,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="100" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-        </StackPanel>
-        <StackPanel Margin="10,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="220" Height="30" Orientation="Horizontal" Grid.Row="1" >
-            <Label Content="E:" Width="40" Height="25" Background="LightGray" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0"/>
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-            <TextBox Width="40" Height="25" Margin="0,0,5,0" />
-        </StackPanel>
-        <StackPanel  Margin="240,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Orientation="Horizontal" Width="100" Height="30">
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-            <TextBox Margin="0,0,5,0" Width="40" Height="25"/>
-        </StackPanel>
-        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="75" Height="25"  Margin="20" Content="Speichern" Background="White"  />
-        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="75" Height="25" Margin="20" Content="Weiter" Background="White"/>
-
+                         SelectedValue="{Binding Path=SchuelerProp.Vorname}">
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="Label_Überschrift" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Height="30" Width="200" Content="Zeugnis - Noten in den Fächern:" FontSize="12" FontWeight="Bold" />
+                <GroupBox HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Margin="10" Height="200" Width="400" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                           
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="Label_SAE" Grid.Column="0" Grid.Row="0" Content="SAE:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_SAE" Grid.Column="1" Grid.Row="0" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                        <Label x:Name="Label_ITS" Grid.Column="2" Grid.Row="0" Content="ITS:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_ITS" Grid.Column="3" Grid.Row="0" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                        <Label x:Name="Label_BWL" Grid.Column="0" Grid.Row="1" Content="BWL:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_BWL" Grid.Column="1" Grid.Row="1" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                        <Label x:Name="Label_WI" Grid.Column="2" Grid.Row="1" Content="WI:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_WI" Grid.Column="3" Grid.Row="1" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                        <Label x:Name="Label_GK" Grid.Column="0" Grid.Row="2" Content="GK:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_GK" Grid.Column="1" Grid.Row="2" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                        <Label x:Name="Label_D" Grid.Column="2" Grid.Row="2" Content="D:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_D" Grid.Column="3" Grid.Row="2" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                        <Label x:Name="Label_E" Grid.Column="0" Grid.Row="3" Content="E:" HorizontalAlignment="left" VerticalAlignment="Center" Margin="10" Width="50" Height="25"/>
+                        <ComboBox x:Name="Noten_E" Grid.Column="1" Grid.Row="3" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btn_zurück" Content="Zurück" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Width="65" Height="25" Margin="10"/>
+        <Button x:Name="btn_speichern" Content="Speichern" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Width="65" Height="25" Margin="10"/>
+        <Button x:Name="btn_generate" Content="Generieren" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1" Width="65" Height="25" Margin="10"/>
     </Grid>
 </Window>
