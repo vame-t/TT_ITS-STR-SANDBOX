@@ -24,14 +24,20 @@ namespace Sandbox.Views
         {
             InitializeComponent();
             MainViewModel_Window2 vm = new MainViewModel_Window2();
-            this.DataContext = vm; 
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+            {
+                vm.CloseAction = new Action(this.Close);
+            }
         }
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
 
-            Application.Current.Shutdown();
-        }
+       
+        //protected override void OnClosed(EventArgs e)
+        //{
+        //    base.OnClosed(e);
+
+        //    Application.Current.Shutdown();
+        //}
 
 
 

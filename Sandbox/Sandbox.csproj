@@ -95,6 +95,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\Fach.cs" />
     <Compile Include="Models\Klasse.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Schueler.cs" />
     <Compile Include="Models\Schuljahr.cs" />
     <Compile Include="ViewModels\MainViewModel_DeleteStudent.cs" />

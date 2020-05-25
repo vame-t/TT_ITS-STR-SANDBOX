@@ -28,11 +28,6 @@
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label x:Name="Label_Anrede" Content="Anrede:" Height="25" Width="50"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,5,0,0"/>
-                <!--<TextBox x:Name="txt_Anrede" Height="25" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,5,0,0"/>-->
-                <!--<ComboBox x:Name="Combo_Anrede" Height="25" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,5,0,0">
-                    <ComboBoxItem x:Name="Herr">Herr</ComboBoxItem>
-                    <ComboBoxItem x:Name="Frau">Frau</ComboBoxItem>
-                </ComboBox>-->
                 <StackPanel  Margin="10,5,0,0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">
                     <RadioButton x:Name="RB_Herr" HorizontalAlignment="Left" Margin="10" Content="Herr" IsChecked="{Binding Path=AnredeHerr, Mode=TwoWay}"></RadioButton>
                     <RadioButton x:Name="RB_Frau" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Frau" IsChecked="{Binding Path=AnredeFrau, Mode=TwoWay}"></RadioButton>

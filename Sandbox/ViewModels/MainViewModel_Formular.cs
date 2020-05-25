@@ -223,7 +223,6 @@ namespace Sandbox.ViewModels
         }
         public void backToMainWindow()
         {
-            //TODO
             FirstWindow mainWindow = new FirstWindow();
             mainWindow.Show();
             CloseAction();

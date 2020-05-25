@@ -25,7 +25,7 @@
                           SelectedValue="{Binding KlasseProp.KlassenIDFK}"
                           SelectedValuePath="{Binding Path=KlasseProp.KlassenID}">
                 </ComboBox>
-                <Button x:Name="Button_Search" Content="search" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Height="25" Margin="20,10,50,10" VerticalContentAlignment="Center"
+                <Button x:Name="Button_Search" Content="Suche" FontStyle="Oblique" VerticalAlignment="Top" HorizontalAlignment="Right" Width="50" Height="25" Margin="20,10,50,10" VerticalContentAlignment="Center"
                         Command="{Binding Path=SearchCommand}"/>
 
                 <ListBox x:Name="Listbox_Students" Margin="50,100,50,75"
