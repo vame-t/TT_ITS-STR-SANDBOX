@@ -34,7 +34,6 @@
                 <ComboBox x:Name="Combo_Students" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="150" Margin="70,10,10,0" Grid.Row="1" 
                          ItemsSource="{Binding Path=Students}"
                          SelectedValue="{Binding Path=SchuelerProp.Vorname}"
-                         SelectedItem="{Binding Path=SchuelerProp.Schueler_ID}"
                         >
                 </ComboBox>
             </Grid>

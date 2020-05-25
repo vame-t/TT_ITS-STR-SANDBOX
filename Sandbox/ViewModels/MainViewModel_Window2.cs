@@ -28,6 +28,7 @@ namespace Sandbox.ViewModels
         //Ein Button generien soll noch implementiert werden. 
 
         //Fields: 
+        int currentStudentID = 0; 
         private Schueler schueler = new Schueler();
         private Klasse klasse = new Klasse();
         private Note note = new Note();
@@ -142,7 +143,7 @@ namespace Sandbox.ViewModels
             
         }
 
-
+        //Constructor:
         public MainViewModel_Window2()
         {
             putClassesIntoComboBox();
@@ -270,20 +271,18 @@ namespace Sandbox.ViewModels
         //TODO sein Vater 
         public void saveGradesIntoDB()
         {
-            //TODO Methode ist noch nicht zu gebrauchen, speichern funktioniert nicht !!!!!!!!!!!!!
             
             try
             {
                 mySqlConnection.Open();
+                currentStudentID  = pickStudentID();
                 string query = "INSERT INTO tbl_note (`Note`, `FK_Fach_id`, `FK_Student_id`) VALUES(@Note,@FK_Fach_id,@FK_Student_id);";
                 MySqlCommand command = new MySqlCommand(query, mySqlConnection);
-                MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
-                using (sqlDataAdapter) 
-                {
-
-                }
-                
+                    command.Parameters.AddWithValue("@Note", NotenProp.Noten);
+                    command.Parameters.AddWithValue("@FK_Fach_id",FachProp.Fach_ID);
+                    command.Parameters.AddWithValue("@FK_Student_id",currentStudentID);
               
+                    command.ExecuteNonQuery(); 
             }
             catch (Exception)
             {
@@ -296,37 +295,26 @@ namespace Sandbox.ViewModels
             }
         }
 
+        public int pickStudentID()
+        {
+            
+            int currentStudentID = 0;
+            string query = "SELECT * FROM `studentmanagement-db`.tbl_student WHERE Vorname= @Vorname;";
+            MySqlCommand command = new MySqlCommand(query, mySqlConnection);
+            MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
+            using (sqlDataAdapter)
+            {
+                command.Parameters.AddWithValue("@Vorname", SchuelerProp.Vorname);
+                currentStudentID = (Int32)command.ExecuteScalar(); 
+
+            }
+            return currentStudentID;
+            
+        }
+
 
 
 
     }
-
-//    mySqlConnection.Open();
-//                string query = "INSERT INTO tbl_note (`Note`, `FK_Fach_id`, `FK_Student_id`) VALUES(@Note,@FK_Fach_id,@FK_Student_id);";
-//    MySqlCommand command = new MySqlCommand(query, mySqlConnection);
-//    MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(command);
-//                using (sqlDataAdapter)
-//                {
-//                command.Parameters.AddWithValue("@Note",NotenProp.Noten);
-//                command.Parameters.AddWithValue("@FK_Fach_id",FachProp.Fach_ID);
-//                command.Parameters.AddWithValue("@FK_Student_id",Students);
-//                    DataTable studentTable = new DataTable();
-//    sqlDataAdapter.Fill(studentTable);
-//                    if (students != null)
-//                    {
-//                        students.Clear();
-//                    }
-//                    foreach (DataRow dataRow in studentTable.Rows)
-//                    {
-//                        Schueler nschueler = new Schueler();
-//nschueler.Schueler_ID = (int) (dataRow["tbl_student_id"]);
-//                        //nschueler.Vorname = Convert.ToString(dataRow["Vorname"]);
-
-
-//                        students.Add(nschueler);
-//                    }
-//                command.ExecuteNonQuery(); 
-//                }
-
 }
 
