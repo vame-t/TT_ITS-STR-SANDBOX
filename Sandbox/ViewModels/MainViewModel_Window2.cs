@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace Sandbox.ViewModels
 {
-    class MainViewModel_Window2 : INotifyPropertyChanged
+   public class MainViewModel_Window2 : INotifyPropertyChanged
     {
         //Implementierung des Interfaces:
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,8 +28,9 @@ namespace Sandbox.ViewModels
         //Ein Button generien soll noch implementiert werden. 
 
         //Fields: 
-        int currentStudentID = 0; 
+        int currentStudentID = 0;
         private Schueler schueler = new Schueler();
+        private DocGenerieren generieren = new DocGenerieren(); 
         private Klasse klasse = new Klasse();
         private Note note = new Note();
         private Fach fach = new Fach();
@@ -38,7 +39,8 @@ namespace Sandbox.ViewModels
         private ObservableCollection<Fach> fächer = new ObservableCollection<Fach>(); 
         private ICommand searchCommand;
         private ICommand backCommand;
-        private ICommand saveCommand; 
+        private ICommand saveCommand;
+        private ICommand generateCommand; 
 
         //Properties: 
         public Action CloseAction { get; set; }
@@ -141,6 +143,19 @@ namespace Sandbox.ViewModels
                 return saveCommand;
             }
             
+        }
+
+        public ICommand GenerateCommand
+        {
+            get
+            {
+                if (generateCommand == null)
+                {
+                    generateCommand = new RelayCommand(() => generieren.docGenerieren());
+                }
+                return generateCommand;
+            }
+
         }
 
         //Constructor:
@@ -268,7 +283,6 @@ namespace Sandbox.ViewModels
 
         }
 
-        //TODO sein Vater 
         public void saveGradesIntoDB()
         {
             

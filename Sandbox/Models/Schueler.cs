@@ -5,11 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using Sandbox.ViewModels; 
 
 namespace Sandbox.Models
 {
     public class Schueler
     {
+
+
+        
+        
+        
+        
         //Fields: 
         //Properties: 
         public String Anrede { get; set; }

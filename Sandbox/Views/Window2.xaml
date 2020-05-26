@@ -81,7 +81,7 @@
         </GroupBox>
         <Button x:Name="btn_zurück" Content="Zurück" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1"  Width="65" Height="25" Margin="10" Command="{Binding Path=BackCommand}"/>
         <Button x:Name="btn_speichern" Content="Speichern" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Width="65" Height="25" Margin="10,10,100,10" Command="{Binding Path=SaveCommand}"/>
-        <Button x:Name="btn_generate" Content="Generieren" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Width="65" Height="25" Margin="10"/>
+        <Button x:Name="btn_generate" Content="Generieren" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Width="65" Height="25" Margin="10" Command="{Binding Path= GenerateCommand}"/>
     </Grid>
 </Window>
 
