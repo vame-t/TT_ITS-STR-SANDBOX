@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sandbox"
         xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="Zeugnis Management Tool" Height="300" Width="550">
+        Title="Zeugnis Management Tool" Height="300" Width="550" MinWidth="550" MaxWidth="550" MinHeight="300" MaxHeight="300" >
     <!--Visibility="{Binding Path=IsVisible, Mode=TwoWay,Converter={StaticResource BoolToVisConverter}}"-->
     <Window.DataContext>
         <vm:MainViewModel_FirstWindow/>

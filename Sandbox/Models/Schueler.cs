@@ -5,22 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using MySql.Data.MySqlClient;
 using Sandbox.ViewModels; 
 
 namespace Sandbox.Models
 {
     public class Schueler
     {
-
-
-        
-        
-        
-        
-        //Fields: 
+        //Fields:
+        //static String connectionString = "SERVER=127.0.0.1;DATABASE=studentmanagement-db;UID=root;PASSWORD=;";
+        //MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
         //Properties: 
         public String Anrede { get; set; }
-        public String Vorname {get; set;}
+        public String Vorname
+        {
+            get;
+            set;
+
+        }
         public String Nachname {get; set;}
         public String GeborenAm {get; set;}
         public String GeburtsOrt {get; set;}
@@ -37,12 +39,17 @@ namespace Sandbox.Models
         {
 
         }
+        
         //Methoden: 
-
         public override string ToString()
         {
             return Vorname;
         }
+
+       
+      
+
+        
 
 
 

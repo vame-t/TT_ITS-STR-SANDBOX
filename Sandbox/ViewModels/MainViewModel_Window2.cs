@@ -29,9 +29,9 @@ namespace Sandbox.ViewModels
 
         //Fields: 
         int currentStudentID = 0;
-        private Schueler schueler = new Schueler();
+        //public Schueler schueler = new Schueler();
         private DocGenerieren generieren = new DocGenerieren(); 
-        private Klasse klasse = new Klasse();
+        //private Klasse klasse = new Klasse();
         private Note note = new Note();
         private Fach fach = new Fach();
         private ObservableCollection<Schueler> students = new ObservableCollection<Schueler>();
@@ -46,19 +46,19 @@ namespace Sandbox.ViewModels
         public Action CloseAction { get; set; }
         public Schueler SchuelerProp
         {
-            get { return schueler; }
+            get { return generieren.schueler; }
             set
             {
-                schueler = value;
+                generieren.schueler = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("SchuelerProp"));
             }
         }
         public Klasse KlassenProp
         {
-            get { return klasse; }
+            get { return generieren.klasse; }
             set
             {
-                klasse = value;
+                generieren.klasse = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("KlassenProp"));
             }
         }
@@ -98,7 +98,6 @@ namespace Sandbox.ViewModels
                 //PropertyChanged(this, new PropertyChangedEventArgs("Noten"));
             }
         }
-
         public ObservableCollection<Fach> Fächer
         {
             get { return fächer; }
@@ -144,7 +143,6 @@ namespace Sandbox.ViewModels
             }
             
         }
-
         public ICommand GenerateCommand
         {
             get
@@ -172,15 +170,12 @@ namespace Sandbox.ViewModels
                 new Note(){Noten = 5, Bezeichnung = "Mangelhaft"},
                 new Note(){Noten = 6, Bezeichnung = "Ungenügend"},
             };
-        //    Fächer = new ObservableCollection<Fach>()
-        //    {
-        //        new Fach(){FachName="Software Anwendung und Entwicklung", FachKuerzel = "SAE"},
-        //        new Fach(){FachName="Betriebswirtschaftslehre", FachKuerzel = "BWL"},
-        //};
+        
 
 
         }
 
+        //Methods: 
         public void putClassesIntoComboBox()
         {
             try
@@ -255,8 +250,9 @@ namespace Sandbox.ViewModels
                     foreach (DataRow dataRow in studentTable.Rows)
                     {
                         Schueler nschueler = new Schueler();
-                        nschueler.Schueler_ID = (int)(dataRow["tbl_student_id"]);
+                        //generieren.schueler.Schueler_ID = (int)(dataRow["tbl_student_id"]);
                         nschueler.Vorname = Convert.ToString(dataRow["Vorname"]);
+                        //generieren.schueler.Nachname = Convert.ToString(dataRow["Nachname"]);
                        
                         
                         students.Add(nschueler);
@@ -295,8 +291,8 @@ namespace Sandbox.ViewModels
                     command.Parameters.AddWithValue("@Note", NotenProp.Noten);
                     command.Parameters.AddWithValue("@FK_Fach_id",FachProp.Fach_ID);
                     command.Parameters.AddWithValue("@FK_Student_id",currentStudentID);
-              
-                    command.ExecuteNonQuery(); 
+                    command.ExecuteNonQuery();
+                MessageBox.Show("Note wurde für das ausgewählte Fach eingetragen, bitte beachten Sie, dass momentan mehrere Einträge zum selben Fach möglich sind. Dies sollte unterlassen werden. Tragen Sie noch die restlichen Noten ein, um die Generierung zu vervollständigen.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception)
             {
@@ -325,9 +321,6 @@ namespace Sandbox.ViewModels
             return currentStudentID;
             
         }
-
-
-
 
     }
 }

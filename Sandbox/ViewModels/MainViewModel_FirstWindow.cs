@@ -12,19 +12,6 @@ namespace Sandbox.ViewModels
         //Implementierung des Interfaces: 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-        //TODO: 
-        /*
-         * Mit dem Button Weiter soll bestimmt werden, welches Fenster sich öffnen soll.
-         * Dies hängt davon ab, welcher RadioButton ausgewählt wurde. 
-         * Anhand des ausgewähltem RadioButtons soll sich entweder Fenster nr.2 also Das Fenster mit den Noten
-         * oder das Formular-Fenster öffnen, indem man einen neuen Schüler eintragen kann. 
-         * Dies soll durch Command Bindings realisiert werden. 
-         * Dadurch ist es sehr wichtig keine Button_Click events in der .cs-Datei der View zu generieren. 
-         * Dafür haben wir jetzt unser ViewModel, denn hier soll die Magie stattfinden
-         * 
-         */
-
         //Fields: 
         Formular formular = new Formular();
         DeleteStudent deleteStudentWindow = new DeleteStudent(); 
@@ -80,6 +67,12 @@ namespace Sandbox.ViewModels
         }
 
         //Methods: 
+
+        /// <summary>
+            /// Diese Methode ermöglicht es nach Auswahl eines Radiobuttons und nach dem Klick des verbundenen Buttons(siehe view: FirstWindow.xaml)
+            /// ein Folgefenster zu öffnen. 
+            /// Welches Fenster geöffnet wird hängt je nach Auswahl des Radiobuttons ab. 
+            /// </summary>
         public void clickNext()
         {
             try

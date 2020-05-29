@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sandbox.Views"
         xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="DeleteStudent" Height="600" Width="400">
+        Title="DeleteStudent" Height="600" Width="400" MinHeight="600" MaxHeight="600" MinWidth="400" MaxWidth="400">
     <Window.DataContext>
         <vm:MainViewModel_DeleteStudent/>
     </Window.DataContext>

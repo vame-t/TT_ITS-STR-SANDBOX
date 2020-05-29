@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sandbox"
         xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="Noten-Formular" Height="450" Width="550">
+        Title="Noten-Formular" Height="450" Width="550" MinHeight="450" MaxHeight="450" MinWidth="550" MaxWidth="550">
     <Window.DataContext>
         <vm:MainViewModel_Window2/>
     </Window.DataContext>
@@ -34,6 +34,7 @@
                 <ComboBox x:Name="Combo_Students" HorizontalAlignment="Center" VerticalAlignment="Top" Height="25" Width="150" Margin="70,10,10,0" Grid.Row="1" 
                          ItemsSource="{Binding Path=Students}"
                          SelectedValue="{Binding Path=SchuelerProp.Vorname}"
+                        
                         >
                 </ComboBox>
             </Grid>

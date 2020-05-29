@@ -13,7 +13,7 @@ namespace Sandbox.ViewModels
 {
     public class MainViewModel_Formular : INotifyPropertyChanged
     {
-        //MySqlConnection aufbauen
+        //MySqlConnection aufbauen:
         static String connectionString = "SERVER=127.0.0.1;DATABASE=studentmanagement-db;UID=root;PASSWORD=;";
         MySqlConnection mySqlConnection = new MySqlConnection(connectionString);
 
@@ -115,13 +115,27 @@ namespace Sandbox.ViewModels
 
         //Methoden:
 
-        //Diese Methode ist noch unvollständig und muss noch bearbeitet werden !!
+        //TODO: Diese Methode ist noch unvollständig und muss noch bearbeitet werden !!
+        /// <summary>
+        /// Diese Methode öffnet die View: Window2.xaml was zur Noteneintragung und zum generieren des Zeugnisses dient. 
+        /// Da diese Methode unvollständig ist wird die aktuelle View:Formular.xaml nicht geschlossen, dieses muss manuell durchgeführt werden. 
+        /// </summary>
         public void clickNext()
         {
             notenFormular.Show();
         }
 
-        //Diese Methode ist noch unvollständig und muss noch bearbeitet werden !!
+        //TODO: Diese Methode ist noch unvollständig und muss noch bearbeitet werden !!
+        /// <summary>
+        /// Diese Methode speichert alle Daten aus der Oberfläche in die Datenbank zu den jeweiligen Spalten der Tabelle tbl_student ab. 
+        /// Wichtig ist, dass diese Methode nur dann funktioniert, wenn alle Felder auf der Oberfläche (Formular.xaml) befüllt sind.
+        /// Auch gibt es momentan keine Validierung zu den Werten, man kann also egal was für einen Wert man will in die Textboxen reinschreiben. 
+        /// Auch ist es möglich einen Schüler mehrmals in die Datenbank abzuspeichern, hier wurde kein Datenbankabgleich implementiert. 
+        /// Daher ist es wichtig Echtdaten einzugeben, damit man die Anwendung anwendbar ist. 
+        /// Fehler können entstehen, wenn Felder leer gelassen werden. 
+        /// Ebenso können Folgefehler entstehen, wenn man einen Namen mehrmals abspeichert. 
+        /// 
+        /// </summary>
         public void SaveStudentToDB()
         {
             try
@@ -157,6 +171,9 @@ namespace Sandbox.ViewModels
 
         }
 
+        /// <summary>
+        /// Mit dieser Methode wird die Anrede Property durch Auswahl eines der beiden Radiobuttons(siehe View: Formular.xaml) befüllt.
+        /// </summary>
         public void decideAnrede()
         {
             if (AnredeHerr == true)
@@ -174,6 +191,9 @@ namespace Sandbox.ViewModels
 
         }
 
+        /// <summary>
+        /// Diese Methode fügt alle verfügbaren Schulklassen aus der Datenbank in eine Combobox. 
+        /// </summary>
         public void putClassesIntoComboBox()
         {
             try
@@ -198,6 +218,9 @@ namespace Sandbox.ViewModels
             }
         }
 
+        /// <summary>
+        /// Diese Methode fügt alle verfügbaren Schuljahre aus der Datenbank in eine Combobox. 
+        /// </summary>
         public void putSchoolYearIntoComboBox()
         {
             try
@@ -221,6 +244,9 @@ namespace Sandbox.ViewModels
                 MessageBox.Show(e.StackTrace);
             }
         }
+        /// <summary>
+        /// Mit dieser Methode ist es möglich, wieder ins Hauptfenster(MainWindow: FirstWindow.xaml) zu gelangen. 
+        /// </summary>
         public void backToMainWindow()
         {
             FirstWindow mainWindow = new FirstWindow();

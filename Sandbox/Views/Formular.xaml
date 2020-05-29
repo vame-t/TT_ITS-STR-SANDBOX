@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sandbox"
         xmlns:vm="clr-namespace:Sandbox.ViewModels"
         mc:Ignorable="d"
-        Title="Formular" Height="450" Width="800">
+        Title="Formular" Height="450" Width="800" MinWidth="800" MaxWidth="800" MinHeight="450" MaxHeight="450">
     <Window.DataContext>
         <vm:MainViewModel_Formular/>
     </Window.DataContext>
